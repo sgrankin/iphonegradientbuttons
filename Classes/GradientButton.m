@@ -11,54 +11,52 @@
 @interface GradientButton()
 @property (nonatomic, readonly) CGGradientRef normalGradient;
 @property (nonatomic, readonly) CGGradientRef highlightGradient;
+
 - (void)hesitateUpdate; // Used to catch and fix problem where quick taps don't get updated back to normal state
 @end
 #pragma mark -
 
 @implementation GradientButton
-@synthesize normalGradientColors;
-@synthesize normalGradientLocations;
-@synthesize highlightGradientColors;
-@synthesize highlightGradientLocations;
-@synthesize cornerRadius;
-@synthesize strokeWeight, strokeColor;
-@synthesize normalGradient, highlightGradient;
+@synthesize normalGradient = _normalGradient;
+@synthesize highlightGradient = _highlightGradient;
+
 #pragma mark -
 - (CGGradientRef)normalGradient
 {
-    if (normalGradient == NULL)
+    if (_normalGradient == NULL)
     {
-        int locCount = [normalGradientLocations count];
+        int locCount = [_normalGradientLocations count];
         CGFloat locations[locCount];
-        for (int i = 0; i < [normalGradientLocations count]; i++)
+        for (int i = 0; i < [_normalGradientLocations count]; i++)
         {
-            NSNumber *location = [normalGradientLocations objectAtIndex:i];
+            NSNumber *location = [_normalGradientLocations objectAtIndex:i];
             locations[i] = [location floatValue];
         }
         CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
         
-        normalGradient = CGGradientCreateWithColors(space, (__bridge CFArrayRef)normalGradientColors, locations);
+        _normalGradient = CGGradientCreateWithColors(space, (__bridge CFArrayRef)_normalGradientColors, locations);
         CGColorSpaceRelease(space);
     }
-    return normalGradient;
+    return _normalGradient;
 }
+
 - (CGGradientRef)highlightGradient
 {
     
-    if (highlightGradient == NULL)
+    if (_highlightGradient == NULL)
     {
-        CGFloat locations[[highlightGradientLocations count]];
-        for (int i = 0; i < [highlightGradientLocations count]; i++)
+        CGFloat locations[[_highlightGradientLocations count]];
+        for (int i = 0; i < [_highlightGradientLocations count]; i++)
         {
-            NSNumber *location = [highlightGradientLocations objectAtIndex:i];
+            NSNumber *location = [_highlightGradientLocations objectAtIndex:i];
             locations[i] = [location floatValue];
         }
         CGColorSpaceRef space = CGColorSpaceCreateDeviceRGB();
         
-        highlightGradient = CGGradientCreateWithColors(space, (__bridge CFArrayRef)highlightGradientColors, locations);
+        _highlightGradient = CGGradientCreateWithColors(space, (__bridge CFArrayRef)_highlightGradientColors, locations);
         CGColorSpaceRelease(space);
     }
-    return highlightGradient;
+    return _highlightGradient;
 }
 #pragma mark -
 - (id)initWithFrame:(CGRect)frame
@@ -414,7 +412,7 @@
     
 	CGFloat resolution = 0.5 * (self.bounds.size.width / imageBounds.size.width + self.bounds.size.height / imageBounds.size.height);
 	
-	CGFloat stroke = strokeWeight * resolution;
+	CGFloat stroke = self.strokeWeight * resolution;
 	if (stroke < 1.0)
 		stroke = ceil(stroke);
 	else
@@ -495,7 +493,7 @@
 	point2 = CGPointMake((self.bounds.size.width / 2.0), 0.0);
 	CGContextDrawLinearGradient(context, gradient, point, point2, (kCGGradientDrawsBeforeStartLocation | kCGGradientDrawsAfterEndLocation));
 	CGContextRestoreGState(context);
-	[strokeColor setStroke];
+	[self.strokeColor setStroke];
 	CGContextSetLineWidth(context, stroke);
 	CGContextSetLineCap(context, kCGLineCapSquare);
 	CGContextAddPath(context, path);
@@ -565,10 +563,10 @@
 #pragma mark -
 - (void)dealloc 
 {
-    if (normalGradient != NULL)
-        CGGradientRelease(normalGradient);
-    if (highlightGradient != NULL)
-        CGGradientRelease(highlightGradient);
+    if (_normalGradient != NULL)
+        CGGradientRelease(_normalGradient);
+    if (_highlightGradient != NULL)
+        CGGradientRelease(_highlightGradient);
 }
 
 @end
