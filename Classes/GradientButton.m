@@ -40,6 +40,18 @@
     return _normalGradient;
 }
 
+- (void)setNormalGradientColors:(NSArray *)normalGradientColors
+{
+    _normalGradient = NULL;
+    _normalGradientColors = normalGradientColors;
+}
+
+- (void)setNormalGradientLocations:(NSArray *)normalGradientLocations
+{
+    _normalGradient = NULL;
+    _normalGradientLocations = normalGradientLocations;
+}
+
 - (CGGradientRef)highlightGradient
 {
     
@@ -58,6 +70,19 @@
     }
     return _highlightGradient;
 }
+
+- (void)setHighlightGradientColors:(NSArray *)highlightGradientColors
+{
+    _highlightGradient = NULL;
+    _highlightGradientColors = highlightGradientColors;
+}
+
+- (void)setHighlightGradientLocations:(NSArray *)highlightGradientLocations
+{
+    _highlightGradient = NULL;
+    _highlightGradientLocations = highlightGradientLocations;
+}
+
 #pragma mark -
 - (id)initWithFrame:(CGRect)frame
 {
