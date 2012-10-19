@@ -28,28 +28,6 @@
     [whiteActionButton useWhiteActionSheetStyle];
     [blackActionButton useBlackActionSheetStyle];
 }
-- (void)viewDidUnload
-{
-    self.blackButton = nil;
-    self.whiteButton = nil;
-    self.alertButton = nil;
-    self.orangeButton = nil;
-    self.redButton = nil;
-    self.greenButton = nil;
-    self.whiteActionButton = nil;
-    self.blackActionButton = nil;
-    
-}
-- (void)dealloc
-{
-    [blackButton release];
-    [whiteButton release];
-    [alertButton release];
-    [orangeButton release];
-    [redButton release];
-    [greenButton release];
-    [whiteActionButton release];
-    [blackActionButton release];
-    [super dealloc];
-}
+
+
 @end

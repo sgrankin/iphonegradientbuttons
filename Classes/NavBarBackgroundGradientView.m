@@ -51,7 +51,7 @@
 	color = [UIColor colorWithRed:0.43 green:0.51 blue:0.63 alpha:1.0];
 	[colors addObject:(id)[color CGColor]];
 	locations[4] = 0.465;
-	gradient = CGGradientCreateWithColors(space, (CFArrayRef)colors, locations);
+	gradient = CGGradientCreateWithColors(space, (__bridge CFArrayRef)colors, locations);
 	CGContextAddPath(context, path);
 	CGContextSaveGState(context);
 	CGContextEOClip(context);
