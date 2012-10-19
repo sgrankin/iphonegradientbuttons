@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.homepage = "http://code.google.com/p/iphonegradientbuttons/"
   s.author   = {"Jeff Lamarche" => "jeff_lamarche@mac.com",
                 "Sergey Grankin" => "sagran@gmail.com"}
-  s.source   = {git:"https://github.com/sagran/iphonegradientbuttons"}
+  s.source   = {git:"https://github.com/sagran/iphonegradientbuttons.git"}
 
   s.source_files = "Classes/{GradientButton,NavBarBackgroundGradientView}.*"
   s.requires_arc = true
